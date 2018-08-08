@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -32,10 +32,10 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import com.github.ryddle.rsql.jpa.entity.Course;
 import com.github.ryddle.rsql.misc.ArgumentFormatException;
 import com.github.ryddle.rsql.misc.ArgumentParser;
 import com.github.ryddle.rsql.misc.DefaultArgumentParser;
-import com.github.tennaito.rsql.jpa.entity.Course;
 
 /**
  *

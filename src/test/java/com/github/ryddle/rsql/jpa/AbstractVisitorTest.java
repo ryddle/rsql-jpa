@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,14 +29,14 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import com.github.tennaito.rsql.jpa.entity.Teacher;
 import org.junit.BeforeClass;
 
-import com.github.tennaito.rsql.jpa.entity.Course;
-import com.github.tennaito.rsql.jpa.entity.CourseDetails;
-import com.github.tennaito.rsql.jpa.entity.Department;
-import com.github.tennaito.rsql.jpa.entity.Person;
-import com.github.tennaito.rsql.jpa.entity.Title;
+import com.github.ryddle.rsql.jpa.entity.Course;
+import com.github.ryddle.rsql.jpa.entity.CourseDetails;
+import com.github.ryddle.rsql.jpa.entity.Department;
+import com.github.ryddle.rsql.jpa.entity.Person;
+import com.github.ryddle.rsql.jpa.entity.Teacher;
+import com.github.ryddle.rsql.jpa.entity.Title;
 
 /**
  * @author AntonioRabelo

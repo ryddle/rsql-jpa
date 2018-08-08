@@ -1,6 +1,7 @@
 /*
  * The MIT License
  *
+ * Copyright 2013 Jakub Jirutka <jakub@jirutka.cz>.
  * Copyright 2015 Antonio Rabelo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,14 +22,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa.entity;
+package com.github.ryddle.rsql.jpa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
+ *
+ * @author Jakub Jirutka <jakub@jirutka.cz>
  * @author Antonio Rabelo
  */
 @Entity
-public class Title extends AbstractTestEntity {
+public class Department extends AbstractTestEntity {
+
+    @Column
+    private String code;
+
+    @ManyToOne
+    private Person head;
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Person getHead() {
+        return head;
+    }
+
+    public void setHead(Person head) {
+        this.head = head;
+    }
 
 }

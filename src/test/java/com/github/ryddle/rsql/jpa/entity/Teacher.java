@@ -1,4 +1,4 @@
-package com.github.tennaito.rsql.jpa.entity;
+package com.github.ryddle.rsql.jpa.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

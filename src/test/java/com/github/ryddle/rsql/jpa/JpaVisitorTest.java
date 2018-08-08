@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
 
 import static junit.framework.Assert.assertEquals;
@@ -55,9 +55,9 @@ import com.github.ryddle.rsql.jpa.JpaCriteriaQueryVisitor;
 import com.github.ryddle.rsql.jpa.JpaPredicateVisitor;
 import com.github.ryddle.rsql.jpa.PredicateBuilder;
 import com.github.ryddle.rsql.jpa.PredicateBuilderStrategy;
+import com.github.ryddle.rsql.jpa.entity.Course;
 import com.github.ryddle.rsql.misc.SimpleMapper;
 import com.github.ryddle.rsql.parser.ast.ComparisonOperatorProxy;
-import com.github.tennaito.rsql.jpa.entity.Course;
 
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.ast.AbstractNode;

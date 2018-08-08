@@ -1,7 +1,6 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Jakub Jirutka <jakub@jirutka.cz>.
  * Copyright 2015 Antonio Rabelo
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,42 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa.entity;
+package com.github.ryddle.rsql.jpa;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
- *
- * @author Jakub Jirutka <jakub@jirutka.cz>
  * @author Antonio Rabelo
  */
-@Entity
-public class Person extends AbstractTestEntity {
-    
-    @Column
-    private String surname;
+public class EntityManagerFactoryInitializer {
 
-    @ManyToMany(cascade=CascadeType.PERSIST)
-    private Set<Title> titles;
-    
-    public String getSurname() {
-        return surname;
+    private static EntityManagerFactory instance;
+
+
+    public static EntityManagerFactory getEntityManagerFactory() {
+        if (instance != null) return instance;
+        instance = Persistence.createEntityManagerFactory("persistenceUnit");
+
+        return instance;
     }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-	public Set<Title> getTitles() {
-		return titles;
-	}
-
-	public void setTitles(Set<Title> titles) {
-		this.titles = titles;
-	}
 }
