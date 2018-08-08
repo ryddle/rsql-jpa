@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.misc;
+package com.github.ryddle.rsql.misc;
 
 import java.util.List;
 

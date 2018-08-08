@@ -1,7 +1,8 @@
 /*
  * The MIT License
  *
- * Copyright 2015 Antonio Rabelo.
+ * Copyright 2013 Jakub Jirutka <jakub@jirutka.cz>.
+ * Coryright 2015 Antonio Rabelo.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,35 +22,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
-
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.From;
-import javax.persistence.criteria.Predicate;
-
-import com.github.tennaito.rsql.builder.BuilderTools;
-
-import cz.jirutka.rsql.parser.ast.Node;
+package com.github.ryddle.rsql.misc;
 
 /**
- * PredicateBuilderStrategy
+ * Indicate that argument is not in suitable format required by entity's
+ * property, i.e. is not parseable to the specified type.
  *
- * Strategy for delegate predicate creation for new operators.
- *
+ * @author Jakub Jirutka <jakub@jirutka.cz>
  * @author AntonioRabelo
- * @since 2015-02-13
  */
-public interface PredicateBuilderStrategy {
+public class ArgumentFormatException extends RuntimeException {
 
     /**
-     * Create a Predicate from the RSQL AST node.
+	 * SERIAL UID
+	 */
+	private static final long serialVersionUID = 521849874508654920L;
+	
+	private final String argument;
+    private final Class<?> propertyType;
+
+
+    /**
+     * Construct an <tt>ArgumentFormatException</tt> with specified argument
+     * and property type.
      *
-     * @param node       RSQL AST node.
-     * @param entity  	 The main entity of the query.
-     * @param manager 	 JPA EntityManager.
-     * @param tools      Builder tools facade.
-     * @return 			 Predicate a predicate representation of the Node.
-     * @throws IllegalArgumentException When illegal arguments are found.
+     * @param argument
+     * @param propertyType
      */
-    public <T> Predicate createPredicate(Node node, From root, Class<T> entity, EntityManager manager, BuilderTools tools) throws IllegalArgumentException;
+    public ArgumentFormatException(String argument, Class<?> propertyType) {
+        super("Cannot cast '" + argument + "' to type " + propertyType);
+        this.argument = argument;
+        this.propertyType = propertyType;
+    }
+
+
+    public String getArgument() {
+        return argument;
+    }
+
+    public Class<?> getPropertyType() {
+        return propertyType;
+    }
 }

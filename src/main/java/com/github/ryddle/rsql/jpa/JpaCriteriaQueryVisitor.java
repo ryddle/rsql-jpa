@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.From;
-import javax.persistence.criteria.Predicate;
 
 import cz.jirutka.rsql.parser.ast.AndNode;
 import cz.jirutka.rsql.parser.ast.ComparisonNode;
@@ -36,66 +36,67 @@ import cz.jirutka.rsql.parser.ast.OrNode;
 import cz.jirutka.rsql.parser.ast.RSQLVisitor;
 
 /**
- * JpaPredicateVisitor
+ * JpaCriteriaQueryVisitor
  *
- * Visitor class for Predicate creation from RSQL AST Nodes.
+ * Visitor class for Criteria Query creation from RSQL AST Nodes.
  *
  * @author AntonioRabelo
  *
  * @param <T> Entity type
  */
-public class JpaPredicateVisitor<T> extends AbstractJpaVisitor<Predicate, T>  implements RSQLVisitor<Predicate, EntityManager> {
+public class JpaCriteriaQueryVisitor<T> extends AbstractJpaVisitor<CriteriaQuery<T>, T>  implements RSQLVisitor<CriteriaQuery<T>, EntityManager> {
 
-	/**
-	 * Logger.
-	 */
-	private static final Logger LOG = Logger.getLogger(JpaPredicateVisitor.class.getName());
+	private static final Logger LOG = Logger.getLogger(JpaCriteriaQueryVisitor.class.getName());
+
+	private final JpaPredicateVisitor<T> predicateVisitor;
 	
-	/**
-	 * Root.
-	 */
-	private From root;
-
 	/**
 	 * Construtor with template varargs for entityClass discovery.
 	 *
 	 * @param t not for usage
 	 */
-	public JpaPredicateVisitor(T... t) {
+	public JpaCriteriaQueryVisitor(T... t) {
 		super(t);
+		this.predicateVisitor = new JpaPredicateVisitor<T>(t);
 	}
-	
+
 	/**
-	 * Define the From node.
-	 * @param root From node that expressions path depends on.
-	 * @return Fluent interface.
+	 * Get the Predicate Visitor instance.
+	 * 
+	 * @return Return the Predicate Visitor.
 	 */
-	public JpaPredicateVisitor<T> defineRoot(From root) {
-		this.root = root;
-		return this;
+	protected JpaPredicateVisitor<T> getPredicateVisitor() {
+		this.predicateVisitor.setBuilderTools(this.getBuilderTools());
+		return this.predicateVisitor;
 	}
 
 	/* (non-Javadoc)
 	 * @see cz.jirutka.rsql.parser.ast.RSQLVisitor#visit(cz.jirutka.rsql.parser.ast.AndNode, java.lang.Object)
 	 */
-	public Predicate visit(AndNode node, EntityManager entityManager) {
-		LOG.log(Level.INFO, "Creating Predicate for AndNode: {0}", node);
-		return PredicateBuilder.<T>createPredicate(node, root, entityClass, entityManager, getBuilderTools());
+	public CriteriaQuery<T> visit(AndNode node, EntityManager entityManager) {
+		LOG.log(Level.INFO, "Creating CriteriaQuery for AndNode: {0}", node);
+		CriteriaQuery<T> criteria = entityManager.getCriteriaBuilder().createQuery(entityClass);
+    	From root = criteria.from(entityClass);
+		return criteria.where(this.getPredicateVisitor().defineRoot(root).visit(node, entityManager));
 	}
 
 	/* (non-Javadoc)
 	 * @see cz.jirutka.rsql.parser.ast.RSQLVisitor#visit(cz.jirutka.rsql.parser.ast.OrNode, java.lang.Object)
 	 */
-	public Predicate visit(OrNode node, EntityManager entityManager) {
-		LOG.log(Level.INFO, "Creating Predicate for OrNode: {0}", node);
-		return PredicateBuilder.<T>createPredicate(node, root, entityClass, entityManager, getBuilderTools());
+	public CriteriaQuery<T> visit(OrNode node, EntityManager entityManager) {
+		LOG.log(Level.INFO, "Creating CriteriaQuery for OrNode: {0}", node);
+		CriteriaQuery<T> criteria = entityManager.getCriteriaBuilder().createQuery(entityClass);
+    	From root = criteria.from(entityClass);
+		return criteria.where(this.getPredicateVisitor().defineRoot(root).visit(node, entityManager));
 	}
 
 	/* (non-Javadoc)
 	 * @see cz.jirutka.rsql.parser.ast.RSQLVisitor#visit(cz.jirutka.rsql.parser.ast.ComparisonNode, java.lang.Object)
 	 */
-	public Predicate visit(ComparisonNode node, EntityManager entityManager) {
-		LOG.log(Level.INFO, "Creating Predicate for ComparisonNode: {0}", node);
-    	return PredicateBuilder.<T>createPredicate(node, root, entityClass, entityManager, getBuilderTools());
+	public CriteriaQuery<T> visit(ComparisonNode node, EntityManager entityManager) {
+		LOG.log(Level.INFO, "Creating CriteriaQuery for ComparisonNode: {0}", node);
+    	CriteriaQuery<T> criteria = entityManager.getCriteriaBuilder().createQuery(entityClass);
+    	From root = criteria.from(entityClass);
+    	return criteria.where(this.getPredicateVisitor().defineRoot(root).visit(node, entityManager));
 	}
 }

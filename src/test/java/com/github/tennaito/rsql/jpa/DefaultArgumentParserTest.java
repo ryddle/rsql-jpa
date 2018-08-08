@@ -32,10 +32,10 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import com.github.ryddle.rsql.misc.ArgumentFormatException;
+import com.github.ryddle.rsql.misc.ArgumentParser;
+import com.github.ryddle.rsql.misc.DefaultArgumentParser;
 import com.github.tennaito.rsql.jpa.entity.Course;
-import com.github.tennaito.rsql.misc.ArgumentFormatException;
-import com.github.tennaito.rsql.misc.ArgumentParser;
-import com.github.tennaito.rsql.misc.DefaultArgumentParser;
 
 /**
  *

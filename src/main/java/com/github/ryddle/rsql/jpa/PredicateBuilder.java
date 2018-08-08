@@ -22,10 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
-import com.github.tennaito.rsql.builder.BuilderTools;
-import com.github.tennaito.rsql.parser.ast.ComparisonOperatorProxy;
+import com.github.ryddle.rsql.builder.BuilderTools;
+import com.github.ryddle.rsql.parser.ast.ComparisonOperatorProxy;
+
 import cz.jirutka.rsql.parser.ast.ComparisonNode;
 import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import cz.jirutka.rsql.parser.ast.LogicalNode;

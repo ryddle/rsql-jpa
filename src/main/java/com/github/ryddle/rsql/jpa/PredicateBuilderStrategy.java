@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Jakub Jirutka <jakub@jirutka.cz>.
+ * Copyright 2015 Antonio Rabelo.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,23 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.misc;
+package com.github.ryddle.rsql.jpa;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.From;
+import javax.persistence.criteria.Predicate;
+
+import com.github.ryddle.rsql.builder.BuilderTools;
+
+import cz.jirutka.rsql.parser.ast.Node;
 
 /**
- * Provides mapping of selectors in RSQL to property names of entities.
+ * PredicateBuilderStrategy
  *
- * @author Jakub Jirutka <jakub@jirutka.cz>
+ * Strategy for delegate predicate creation for new operators.
+ *
+ * @author AntonioRabelo
+ * @since 2015-02-13
  */
-public interface Mapper {
+public interface PredicateBuilderStrategy {
 
     /**
-     * Translate given selector to the mapped property name or dot-separated
-     * path of the property.
+     * Create a Predicate from the RSQL AST node.
      *
-     * @param selector Selector that identifies some element of an entry's content.
-     * @param entityClass entity class
-     * @return Property name or dot-separated path of the property.
+     * @param node       RSQL AST node.
+     * @param entity  	 The main entity of the query.
+     * @param manager 	 JPA EntityManager.
+     * @param tools      Builder tools facade.
+     * @return 			 Predicate a predicate representation of the Node.
+     * @throws IllegalArgumentException When illegal arguments are found.
      */
-    String translate(String selector, Class<?> entityClass);
-
+    public <T> Predicate createPredicate(Node node, From root, Class<T> entity, EntityManager manager, BuilderTools tools) throws IllegalArgumentException;
 }

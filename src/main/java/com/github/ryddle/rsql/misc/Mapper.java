@@ -2,7 +2,6 @@
  * The MIT License
  *
  * Copyright 2013 Jakub Jirutka <jakub@jirutka.cz>.
- * Coryright 2015 Antonio Rabelo.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,45 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.misc;
+package com.github.ryddle.rsql.misc;
 
 /**
- * Indicate that argument is not in suitable format required by entity's
- * property, i.e. is not parseable to the specified type.
+ * Provides mapping of selectors in RSQL to property names of entities.
  *
  * @author Jakub Jirutka <jakub@jirutka.cz>
- * @author AntonioRabelo
  */
-public class ArgumentFormatException extends RuntimeException {
+public interface Mapper {
 
     /**
-	 * SERIAL UID
-	 */
-	private static final long serialVersionUID = 521849874508654920L;
-	
-	private final String argument;
-    private final Class<?> propertyType;
-
-
-    /**
-     * Construct an <tt>ArgumentFormatException</tt> with specified argument
-     * and property type.
+     * Translate given selector to the mapped property name or dot-separated
+     * path of the property.
      *
-     * @param argument
-     * @param propertyType
+     * @param selector Selector that identifies some element of an entry's content.
+     * @param entityClass entity class
+     * @return Property name or dot-separated path of the property.
      */
-    public ArgumentFormatException(String argument, Class<?> propertyType) {
-        super("Cannot cast '" + argument + "' to type " + propertyType);
-        this.argument = argument;
-        this.propertyType = propertyType;
-    }
+    String translate(String selector, Class<?> entityClass);
 
-
-    public String getArgument() {
-        return argument;
-    }
-
-    public Class<?> getPropertyType() {
-        return propertyType;
-    }
 }

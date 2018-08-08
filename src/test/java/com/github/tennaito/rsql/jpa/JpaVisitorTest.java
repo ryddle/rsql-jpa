@@ -49,10 +49,15 @@ import javax.persistence.criteria.Root;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.tennaito.rsql.builder.BuilderTools;
+import com.github.ryddle.rsql.builder.BuilderTools;
+import com.github.ryddle.rsql.jpa.JpaCriteriaCountQueryVisitor;
+import com.github.ryddle.rsql.jpa.JpaCriteriaQueryVisitor;
+import com.github.ryddle.rsql.jpa.JpaPredicateVisitor;
+import com.github.ryddle.rsql.jpa.PredicateBuilder;
+import com.github.ryddle.rsql.jpa.PredicateBuilderStrategy;
+import com.github.ryddle.rsql.misc.SimpleMapper;
+import com.github.ryddle.rsql.parser.ast.ComparisonOperatorProxy;
 import com.github.tennaito.rsql.jpa.entity.Course;
-import com.github.tennaito.rsql.misc.SimpleMapper;
-import com.github.tennaito.rsql.parser.ast.ComparisonOperatorProxy;
 
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.ast.AbstractNode;
@@ -160,7 +165,7 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
 			rootNode.accept(visitor, entityManager);
 			fail("should have failed since type isn't Comparable");
 		} catch (IllegalArgumentException e) {
-    		assertEquals("Invalid type for comparison operator: =gt= type: com.github.tennaito.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
+    		assertEquals("Invalid type for comparison operator: =gt= type: com.github.ryddle.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
 		}
 	}
 
@@ -202,7 +207,7 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
 			rootNode.accept(visitor, entityManager);
 			fail("should have failed since type isn't Comparable");
 		} catch (IllegalArgumentException e) {
-			assertEquals("Invalid type for comparison operator: =ge= type: com.github.tennaito.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
+			assertEquals("Invalid type for comparison operator: =ge= type: com.github.ryddle.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
 		}
 	}
 
@@ -254,7 +259,7 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
 			rootNode.accept(visitor, entityManager);
 			fail("should have failed since type isn't Comparable");
 		} catch (IllegalArgumentException e) {
-			assertEquals("Invalid type for comparison operator: =lt= type: com.github.tennaito.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
+			assertEquals("Invalid type for comparison operator: =lt= type: com.github.ryddle.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
 		}
 	}
 
@@ -286,7 +291,7 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
 			rootNode.accept(visitor, entityManager);
 			fail("should have failed since type isn't Comparable");
 		} catch (IllegalArgumentException e) {
-			assertEquals("Invalid type for comparison operator: =le= type: com.github.tennaito.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
+			assertEquals("Invalid type for comparison operator: =le= type: com.github.ryddle.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
 		}
 	}
 
@@ -532,7 +537,7 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
     		PredicateBuilder.createPredicate(new OtherNode(), null, null, null, null);
     		fail();
     	} catch (IllegalArgumentException e) {
-    		assertEquals("Unknown expression type: class com.github.tennaito.rsql.jpa.JpaVisitorTest$OtherNode", e.getMessage());
+    		assertEquals("Unknown expression type: class com.github.ryddle.rsql.jpa.JpaVisitorTest$OtherNode", e.getMessage());
     	}
     }
     

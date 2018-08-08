@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.parser.ast;
+package com.github.ryddle.rsql.parser.ast;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
 import javax.persistence.EntityManager;
 
-import com.github.tennaito.rsql.builder.BuilderTools;
-import com.github.tennaito.rsql.builder.SimpleBuilderTools;
+import com.github.ryddle.rsql.builder.BuilderTools;
+import com.github.ryddle.rsql.builder.SimpleBuilderTools;
 
 import cz.jirutka.rsql.parser.ast.RSQLVisitor;
 

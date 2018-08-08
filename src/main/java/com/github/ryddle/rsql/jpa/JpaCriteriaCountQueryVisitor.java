@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.jpa;
+package com.github.ryddle.rsql.jpa;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

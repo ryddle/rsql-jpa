@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.tennaito.rsql.builder;
+package com.github.ryddle.rsql.builder;
 
-import com.github.tennaito.rsql.jpa.PredicateBuilderStrategy;
-import com.github.tennaito.rsql.misc.ArgumentParser;
-import com.github.tennaito.rsql.misc.DefaultArgumentParser;
-import com.github.tennaito.rsql.misc.Mapper;
-import com.github.tennaito.rsql.misc.SimpleMapper;
+import com.github.ryddle.rsql.jpa.PredicateBuilderStrategy;
+import com.github.ryddle.rsql.misc.ArgumentParser;
+import com.github.ryddle.rsql.misc.DefaultArgumentParser;
+import com.github.ryddle.rsql.misc.Mapper;
+import com.github.ryddle.rsql.misc.SimpleMapper;
 
 /**
  * Simple Builder Tools
