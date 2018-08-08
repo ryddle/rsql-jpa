@@ -45,6 +45,7 @@ public enum ComparisonOperatorProxy {
 	GREATER_THAN_OR_EQUAL(RSQLOperators.GREATER_THAN_OR_EQUAL),
 	LESS_THAN(RSQLOperators.LESS_THAN),
 	LESS_THAN_OR_EQUAL(RSQLOperators.LESS_THAN_OR_EQUAL),
+	IN_DATE(new ComparisonOperator("=indate=")),
 	IN(RSQLOperators.IN),
 	NOT_IN(RSQLOperators.NOT_IN);
 

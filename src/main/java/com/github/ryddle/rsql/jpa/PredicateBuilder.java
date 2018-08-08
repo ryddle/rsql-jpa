@@ -330,6 +330,18 @@ public final class PredicateBuilder {
                     }
                     return predicate;
                 }
+	    		case IN_DATE : {
+	    			Object argument = arguments.get(0);
+
+                    Predicate predicate;
+                    if (argument instanceof Date){
+                    	int days = 1;
+                    	predicate = createBetweenThan(propertyPath, (Date)argument, modifyDate(argument, days), manager);
+                    } else {
+                        throw new IllegalArgumentException(buildNotComparableMessage(operator, argument));
+                    }
+                    return predicate;
+                }
 	    		case IN : return createIn(propertyPath, arguments, manager);
 	    		case NOT_IN : return createNotIn(propertyPath, arguments, manager);
     		}

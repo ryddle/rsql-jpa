@@ -50,13 +50,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.ryddle.rsql.builder.BuilderTools;
-import com.github.ryddle.rsql.jpa.JpaCriteriaCountQueryVisitor;
-import com.github.ryddle.rsql.jpa.JpaCriteriaQueryVisitor;
-import com.github.ryddle.rsql.jpa.JpaPredicateVisitor;
-import com.github.ryddle.rsql.jpa.PredicateBuilder;
-import com.github.ryddle.rsql.jpa.PredicateBuilderStrategy;
 import com.github.ryddle.rsql.jpa.entity.Course;
 import com.github.ryddle.rsql.misc.SimpleMapper;
+import com.github.ryddle.rsql.parser.RSQLParserUtils;
 import com.github.ryddle.rsql.parser.ast.ComparisonOperatorProxy;
 
 import cz.jirutka.rsql.parser.RSQLParser;
@@ -66,6 +62,7 @@ import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import cz.jirutka.rsql.parser.ast.LogicalNode;
 import cz.jirutka.rsql.parser.ast.LogicalOperator;
 import cz.jirutka.rsql.parser.ast.Node;
+import cz.jirutka.rsql.parser.ast.RSQLOperators;
 import cz.jirutka.rsql.parser.ast.RSQLVisitor;
 
 /**
@@ -293,6 +290,26 @@ public class JpaVisitorTest extends AbstractVisitorTest<Course> {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Invalid type for comparison operator: =le= type: com.github.ryddle.rsql.jpa.entity.Teacher must implement Comparable<Teacher>", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testInDate() throws Exception {
+		Node rootNode = RSQLParserUtils.getParser().parse("startDate=indate='2018-08-08'");
+		RSQLVisitor<CriteriaQuery<Course>, EntityManager> visitor = new JpaCriteriaQueryVisitor<Course>();
+		CriteriaQuery<Course> query = rootNode.accept(visitor, entityManager);
+
+		List<Course> courses = entityManager.createQuery(query).getResultList();
+		assertEquals(1, courses.size());
+	}
+	
+	@Test
+	public void testInDateNoResult() throws Exception {
+		Node rootNode = RSQLParserUtils.getParser().parse("startDate=indate='2018-08-09'");
+		RSQLVisitor<CriteriaQuery<Course>, EntityManager> visitor = new JpaCriteriaQueryVisitor<Course>();
+		CriteriaQuery<Course> query = rootNode.accept(visitor, entityManager);
+
+		List<Course> courses = entityManager.createQuery(query).getResultList();
+		assertEquals(0, courses.size());
 	}
 
 
